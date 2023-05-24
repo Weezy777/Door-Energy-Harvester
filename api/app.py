@@ -12,8 +12,7 @@ app = FastAPI()
 
 origins = [
     
-    "https://ecse3038-lab3-tester.netlify.app", 
-    "http://localhost:8000",
+    "http://localhost:5500",
 
 ]
 
