@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <canvas id="voltage_chart" style="width:100%;max-width:700px"></canvas>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="logo">Door Energy Harvesting Data Logging</div>
+      <div class="nav-items">
+        <a href="/">About Owner</a> <a href="/">Contact Deatils</a> <a href="/">Purchase product</a>
+      </div>
+    </nav>
+    <section class="hero">
+      <div class="hero-container">
+        <div class="column-left">
+          <h1>Current and Voltage readings from ESP</h1>
+          <p>
+            System efficiency based on input voltage and current and output voltage and current 
+          </p>
+          <button>Next Data Visualiser</button>
+        </div>
+        <div class="column-right">
+          <canvas id="voltage_chart" style="width:100%;max-width:700px"></canvas>
     <canvas id="current_chart" style="width:100%;max-width:700px"></canvas>
     <script
 src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
@@ -70,5 +86,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     
 
 </script>
-</body>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
