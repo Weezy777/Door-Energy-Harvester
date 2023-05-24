@@ -43,5 +43,5 @@ async def newprofile(request:Request):
 
 @app.get("/data")
 async def retrive_tanks():
-    PowerObjects = await db["Power_data"].find().sort("datetime",-1).to_list(10)
+    PowerObjects = await db["Power_data"].find().sort("datetime",-1).to_list(10).reverse()
     return PowerObjects

@@ -7,24 +7,67 @@
     <title>Document</title>
 </head>
 <body>
-    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+    <canvas id="voltage_chart" style="width:100%;max-width:700px"></canvas>
+    <canvas id="current_chart" style="width:100%;max-width:700px"></canvas>
     <script
 src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 </script>
 <script>
-    var data =[]
-    fetch("https://door-energy-harvester-api.onrender.com/data")
-    .then(res => res.json())
-    .then(json => {
-        data = json.map(point => ({x: point.datatime, y: point.voltage}))
-    })    
-    const myChart = new Chart("myChart", {
-        type: "line",
-        data: {
-            datasets: data
-        },
-        options: {}
-    });
+    var data ={}
+
+    
+
+    const voltageChart = new Chart("voltage_chart", {
+            type: "line",
+            data: {
+                //labels: ["2023-05-24T01:37:28.257000'"],
+                datasets: [
+                    {
+                        label: "Voltage plot against Time",
+                        borderColor: "rgb(255,83,73)",
+                        backgroundColor: "pink",
+                        data: data.voltage_data
+                    }
+                ]
+            },
+            options: {}
+        });
+        const currentChart = new Chart("current_chart", {
+            type: "line",
+            data: {
+                //labels: ["2023-05-24T01:37:28.257000'"],
+                datasets: [
+                    {
+                        label: "Current plot against Time",
+                        borderColor: "blue",
+                        backgroundColor: "cyan",
+                        data: data.current_data
+                    }
+                ]
+            },
+            options: {}
+        });
+    
+        setInterval( async function(){
+            var res = await fetch("https://door-energy-harvester-api.onrender.com/data");
+            var json = await res.json()
+            var voltage_data = json.map(point => ({x: point.datetime, y: point.voltage}))
+            var current_data = json.map(point => ({x: point.datetime, y: point.current}))
+            
+            // data ={
+            //     voltage_data,
+            //     current_data
+            // }  
+            voltageChart.data.datasets[0].data=voltage_data
+            voltageChart.data.labels = json.map(point => point.datetime)
+
+            currentChart.data.datasets[0].data=current_data
+            currentChart.data.labels = json.map(point => point.datetime)
+            console.log(voltage_data)
+            await voltageChart.update()      
+            await currentChart.update()      
+        }, 1000)
+    
 
 </script>
 </body>

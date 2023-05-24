@@ -4,10 +4,26 @@
 #include <ArduinoJson.h>
 #include "env.h" 
 
-#define endpoint "http://172.16.189.12:8000/data"
-float current = 2.5;
-float voltage = 4.3;
-float efficiency = 70;
+
+
+float getCurrent(){
+
+  return random(2.5,10);
+}
+
+float getVoltage(){
+ return random(2,5);
+}
+
+int getEff(){
+  return random(0,100);
+}
+
+#define endpoint "https://door-energy-harvester-api.onrender.com/data"
+
+
+
+
 
 void setup() {
  Serial.begin(9600);
@@ -44,6 +60,12 @@ void loop() {
     // Serialise JSON object into a string to be sent to the API
     StaticJsonDocument<64> doc;
     String httpRequestData;
+
+    float current = getCurrent();
+    float voltage = getVoltage();
+    float efficiency = getEff();
+
+
 
     doc["current"] = current;
     doc["voltage"] = voltage;
