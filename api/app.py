@@ -16,7 +16,6 @@ origins = [
 
 ]
 
-]
 
 
 app.add_middleware(
