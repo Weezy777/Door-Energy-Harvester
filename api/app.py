@@ -12,7 +12,9 @@ app = FastAPI()
 
 origins = [
     
-    "http://localhost:5500","http://localhost:5500/client"
+    "http://localhost:5500","http://localhost:5500/client","http://localhost:5500/client/index.html"
+
+]
 
 ]
 
