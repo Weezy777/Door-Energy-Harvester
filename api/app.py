@@ -37,6 +37,9 @@ pydantic.json.ENCODERS_BY_TYPE[ObjectId]=str
 async def newprofile(request:Request):
     PowerObject = await request.json()
     PowerObject ["datetime"] = datetime.now()
+    currentsensorvoltage = PowerObject["current"]/1024*5.00
+    PowerObject["current"]= (currentsensorvoltage-2.5)/0.185
+    PowerObject["voltage"] = PowerObject["voltage"]/1024*5.00
     new_object = await db["Power_data"].insert_one(PowerObject)
     foundObject = await db["Power_data"].find_one({"_id": new_object.inserted_id})
     return foundObject
